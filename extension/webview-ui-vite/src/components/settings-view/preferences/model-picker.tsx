@@ -269,6 +269,7 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 								</span>
 								<br />
 								{selectedModel.provider !== "kodu" &&
+									selectedModel.provider !== "dyad" &&
 									!currentModelInfo?.providerData.currentProvider && (
 										<span
 											onClick={() => {
