@@ -14,6 +14,9 @@ export async function getProvider(id: string) {
 	if (id === "kodu") {
 		return { provider: providerConfigs.kodu }
 	}
+	if (id === "dyad") {
+		return { provider: providerConfigs.dyad }
+	}
 	const providersString = await SecretStateManager.getInstance().getSecretState("providers")
 	const providers = z.array(providerSettingsSchema).safeParse(JSON.parse(providersString || "[]")).data
 	const provider = providers?.find((p) => p.providerId === id)
@@ -52,6 +55,19 @@ export async function getModelProviderData(providerId: string) {
 			providerId,
 			currentProvider: providerSettings,
 			models: providerConfigs.kodu.models,
+		}
+	}
+	if (providerId === "dyad") {
+		const apiKey = await SecretStateManager.getInstance().getSecretState("dyadApiKey")
+		const providerSettings: ProviderSettings = {
+			providerId: "dyad",
+			apiKey,
+			modelId: "dyad",
+		}
+		return {
+			providerId,
+			currentProvider: providerSettings,
+			models: providerConfigs.dyad.models,
 		}
 	}
 	const providersData = await SecretStateManager.getInstance().getSecretState("providers")

@@ -109,6 +109,11 @@ export interface KoduSettings extends BaseProviderSettings {
 	apiKey: string
 }
 
+export interface DyadSettings extends BaseProviderSettings {
+	providerId: "dyad"
+	apiKey: string
+}
+
 export interface MistralSettings extends BaseProviderSettings {
 	providerId: "mistral"
 	apiKey: string
@@ -116,6 +121,7 @@ export interface MistralSettings extends BaseProviderSettings {
 
 export type ProviderSettings =
 	| KoduSettings
+	| DyadSettings
 	| GoogleGenAISettings
 	| GoogleVertexSettings
 	| AmazonBedrockSettings

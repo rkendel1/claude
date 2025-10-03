@@ -61,10 +61,10 @@ export interface ApiHandler {
 }
 
 export function buildApiHandler(configuration: ApiConstructorOptions): ApiHandler {
-	if (configuration.providerSettings.providerId !== "kodu") {
-		return new CustomApiHandler(configuration)
+	if (configuration.providerSettings.providerId === "kodu") {
+		return new KoduHandler(configuration)
 	}
-	return new KoduHandler(configuration)
+	return new CustomApiHandler(configuration)
 }
 
 export function withoutImageData(

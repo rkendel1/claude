@@ -9,7 +9,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google"
 import { createOpenRouter } from "@openrouter/ai-sdk-provider"
 import { convertToAISDKFormat } from "../../utils/ai-sdk-format"
 import { customProviderSchema, ModelInfo } from "./types"
-import { PROVIDER_IDS } from "./constants"
+import { DEFAULT_BASE_URLS, PROVIDER_IDS } from "./constants"
 import { calculateApiCost } from "../api-utils"
 import { mistralConfig } from "./config/mistral"
 import { version } from "../../../package.json"
@@ -63,6 +63,22 @@ export class CustomProviderError extends Error {
 
 const providerToAISDKModel = (settings: ApiConstructorOptions, modelId: string): LanguageModelV1 => {
 	switch (settings.providerSettings.providerId) {
+		case PROVIDER_IDS.DYAD:
+			if (!settings.providerSettings.apiKey) {
+				throw new CustomProviderError(
+					"Dyad Missing API key",
+					settings.providerSettings.providerId,
+					modelId
+				)
+			}
+			return createOpenAI({
+				apiKey: settings.providerSettings.apiKey,
+				compatibility: "compatible",
+				baseURL: DEFAULT_BASE_URLS[PROVIDER_IDS.DYAD],
+				headers: {
+					"User-Agent": `Kodu/${version}`,
+				},
+			}).languageModel(modelId)
 		case PROVIDER_IDS.OPENROUTER:
 			if (!settings.providerSettings.apiKey) {
 				throw new CustomProviderError(
