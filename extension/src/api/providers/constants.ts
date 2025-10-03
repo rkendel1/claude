@@ -1,6 +1,7 @@
 // constants.ts
 export const PROVIDER_IDS = {
 	KODU: "kodu",
+	DYAD: "dyad",
 	GOOGLE_GENAI: "google-genai",
 	GOOGLE_VERTEX: "google-vertex",
 	AMAZON_BEDROCK: "amazon-bedrock",
@@ -17,6 +18,7 @@ export const PROVIDER_IDS = {
 
 export const PROVIDER_NAMES = {
 	[PROVIDER_IDS.KODU]: "Kodu",
+	[PROVIDER_IDS.DYAD]: "Dyad",
 	[PROVIDER_IDS.GOOGLE_GENAI]: "Google AI Studio",
 	[PROVIDER_IDS.GOOGLE_VERTEX]: "Google Vertex AI",
 	[PROVIDER_IDS.AMAZON_BEDROCK]: "Amazon Bedrock",
@@ -33,6 +35,7 @@ export const PROVIDER_NAMES = {
 
 export const DEFAULT_BASE_URLS = {
 	[PROVIDER_IDS.KODU]: "https://www.kodu.ai/api/inference-stream",
+	[PROVIDER_IDS.DYAD]: "http://localhost:3000/api",
 	[PROVIDER_IDS.GOOGLE_GENAI]: "https://generativelanguage.googleapis.com/v1beta",
 	[PROVIDER_IDS.OPENAI]: "https://api.openai.com/v1",
 	[PROVIDER_IDS.TOGETHER_AI]: "https://api.together.xyz/v1",

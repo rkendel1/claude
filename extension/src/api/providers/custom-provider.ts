@@ -85,6 +85,18 @@ const providerToAISDKModel = (settings: ApiConstructorOptions, modelId: string):
 			return createAnthropic({
 				apiKey: settings.providerSettings.apiKey,
 			}).languageModel(modelId)
+		case PROVIDER_IDS.DYAD:
+			if (!settings.providerSettings.apiKey) {
+				throw new CustomProviderError(
+					"Dyad Missing API key",
+					settings.providerSettings.providerId,
+					modelId
+				)
+			}
+			return createAnthropic({
+				apiKey: settings.providerSettings.apiKey,
+				baseURL: settings.providerSettings.baseUrl,
+			}).languageModel(modelId)
 		case PROVIDER_IDS.DEEPSEEK:
 			if (!settings.providerSettings.apiKey) {
 				throw new CustomProviderError("Deepseek Missing API key", settings.providerSettings.providerId, modelId)

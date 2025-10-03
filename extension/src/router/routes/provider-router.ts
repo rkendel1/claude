@@ -14,6 +14,9 @@ export async function getProvider(id: string) {
 	if (id === "kodu") {
 		return { provider: providerConfigs.kodu }
 	}
+	if (id === "dyad") {
+		return { provider: providerConfigs.dyad }
+	}
 	const providersString = await SecretStateManager.getInstance().getSecretState("providers")
 	const providers = z.array(providerSettingsSchema).safeParse(JSON.parse(providersString || "[]")).data
 	const provider = providers?.find((p) => p.providerId === id)
